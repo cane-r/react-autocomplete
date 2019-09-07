@@ -5,6 +5,7 @@
 import React from 'react';
 //////////////extra libraries///////////////////////
 import axios from 'axios';
+import CompletionItem from  './completionitem'
 ///////////////////////////////////
 class Menu extends React.Component {
 
@@ -84,12 +85,6 @@ class Menu extends React.Component {
  }
 
 
- onClick(e){
-    //alert(e);
- }
-        
-
-
     /**
      * Renders the default app in the window, we have assigned this to an element called root.
      * 
@@ -110,7 +105,6 @@ class Menu extends React.Component {
                             <a href="#" className="nav-item">GOODBYES</a>
                             <a href="#" className="nav-item">STORES</a>
                             <a href="#" className="nav-item">INSPIRATION</a>
-
                             <a href="#" onClick={(e) => this.showSearchContainer(e)}>
                                 <i className="material-icons search">search</i>
                             </a>
@@ -122,38 +116,17 @@ class Menu extends React.Component {
                     <a href="#" onClick={(e) => this.showSearchContainer(e)}>
                         <i className="material-icons close">close</i>
                     </a>
-
                 <div className={ (this.state.showingCompletionItems  ? "visible " : "invisible ") + "row"}>
                     <ul className="list-item-container">
                  {this.state.completionItems.map((item, index) => {
-              /*
-              Here a component can be introduced also
-              , like Component(attrs...,data=completionItems,props...)
-    */
               return (
-                <li className={ (item.isActive  ? "visible " : "invisible " ) + "list-item" } key={index} 
-
-                id={item._id} onClick={() => this.onClick(item)}>
-                <div className="col-sm-10 col-md-10 col-xs-10 col-lg-10 offset-sm-1 offset-md-1 offset-xs-1 offset-lg-1">
-         <div className="card mb-4">
-            <img className="card-img-top img-responsive image" src={item.picture} alt="product image"/>
-            <h6 className="card-text price">{item.price}</h6>
-            <div className="card-body">
-               <h5 className="card-title">{item.name}</h5>
-               <p className="card-text">{item.about}</p>
-            </div>
-         </div>
-          </div>
-                </li>
+                <CompletionItem itemVar={item} itemIndex={index} key={index}/>
              );
-
             })}
                     </ul>
                 </div>
                 </div>
                 
-
-
             </header>
         );
     }
